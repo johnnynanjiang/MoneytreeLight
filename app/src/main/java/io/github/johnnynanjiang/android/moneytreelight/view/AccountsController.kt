@@ -7,6 +7,7 @@ class AccountsController : Typed2EpoxyController<List<Account>, Boolean>() {
     override fun buildModels(accounts: List<Account>?, loadingMore: Boolean?) {
         accounts?.forEach {
             accountRow {
+                id(it.id)
                 account(it)
             }
         }
