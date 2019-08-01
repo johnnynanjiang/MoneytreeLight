@@ -3,6 +3,8 @@
 buildscript {
     ext.kotlin_version = '1.2.71'
     ext.navVersion = '2.0.0'
+    ext.epoxyVersion = '3.2.0'
+    ext.mvrxVersion = '1.0.2'
 
     repositories {
         maven { url 'https://maven.aliyun.com/repository/google' }
