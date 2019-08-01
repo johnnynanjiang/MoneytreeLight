@@ -1,9 +1,9 @@
 package io.github.johnnynanjiang.android.moneytreelight
 
-import android.support.v7.app.ActionBarActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : ActionBarActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

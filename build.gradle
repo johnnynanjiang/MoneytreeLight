@@ -2,6 +2,8 @@
 
 buildscript {
     ext.kotlin_version = '1.2.71'
+    ext.navVersion = '2.0.0'
+
     repositories {
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
