@@ -8,7 +8,9 @@ class AccountsController : Typed2EpoxyController<List<Account>, Boolean>() {
         accounts?.forEach {
             accountRow {
                 id(it.id)
-                account(it)
+                name(it.name)
+                currency(it.currency)
+                balance(it.current_balance.toString())
             }
         }
     }
