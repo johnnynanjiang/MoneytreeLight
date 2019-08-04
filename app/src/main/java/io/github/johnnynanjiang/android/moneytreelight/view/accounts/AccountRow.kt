@@ -3,7 +3,9 @@ package io.github.johnnynanjiang.android.moneytreelight.view.accounts
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
+import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
 import io.github.johnnynanjiang.android.moneytreelight.R
@@ -34,4 +36,7 @@ class AccountRow @JvmOverloads constructor(
     fun setBalance(balance: CharSequence) {
         accountBalance.text = balance
     }
+
+    @CallbackProp
+    fun setClickListener(listener: View.OnClickListener?) = setOnClickListener(listener)
 }

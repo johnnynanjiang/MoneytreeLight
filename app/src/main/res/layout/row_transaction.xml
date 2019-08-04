@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView android:id="@+id/date"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              tools:text="transaction date"/>
+
+    <TextView android:id="@+id/category"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              tools:text="transaction category"/>
+
+    <TextView android:id="@+id/description"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              tools:text="transaction description"/>
+
+    <TextView android:id="@+id/amount"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              tools:text="1000.00"/>
+</LinearLayout>

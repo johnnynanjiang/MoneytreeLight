@@ -7,7 +7,18 @@
     <fragment
             android:id="@+id/accountsFragment"
             android:name="io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountsFragment"
-            android:label="Dog Adoption">
+            android:label="Accounts">
+        <action
+                android:id="@+id/action_accounts_to_transactions"
+                app:destination="@id/transactionsFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
 
+    <fragment
+            android:id="@+id/transactionsFragment"
+            android:name="io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionsFragment"
+            android:label="Transactions"/>
 </navigation>

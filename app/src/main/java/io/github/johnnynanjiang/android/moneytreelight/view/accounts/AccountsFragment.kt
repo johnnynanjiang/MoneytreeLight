@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_accounts.accountsRecyclerView
 
 class AccountsFragment : BaseMvRxFragment() {
     private val viewModel: AccountsViewModel by activityViewModel()
-    private val accountsController = AccountsController()
+    private val accountsController = AccountsController(fragment = this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_accounts, container, false)

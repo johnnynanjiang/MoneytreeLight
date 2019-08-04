@@ -2,30 +2,19 @@ package io.github.johnnynanjiang.android.moneytreelight.data
 
 import io.github.johnnynanjiang.android.moneytreelight.viewmodel.Account
 import io.reactivex.Observable
-import android.content.Context
+import io.github.johnnynanjiang.android.moneytreelight.util.LocalJSONFileLoader
 import org.json.JSONArray
-import org.json.JSONObject
-import java.lang.Exception
 import java.math.BigDecimal
 
-class LocalAccountsRepository(private val applicationContext: Context) : AccountsRepository {
+class LocalAccountsRepository(private val localJSONFileLoader: LocalJSONFileLoader) : AccountsRepository {
     companion object {
         private const val ACCOUNTS_FILENAME = "json/accounts.json"
     }
 
-    private fun getJSONObject(): JSONObject =
-        JSONObject(loadJSONFile())
-
-    private fun loadJSONFile(): String =
-        try {
-            applicationContext.assets.open(ACCOUNTS_FILENAME).bufferedReader().use { it.readText() }
-        } catch (e: Exception) {
-            throw e
-        }
-
     override fun getAccounts() =
         Observable.fromCallable<List<Account>> {
-            val json = getJSONObject()
+            val json = localJSONFileLoader.getJSONObject(ACCOUNTS_FILENAME)
+
             val jsonAccounts = json.get("accounts") as JSONArray
 
             val accounts = mutableListOf<Account>()
