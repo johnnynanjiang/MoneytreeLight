@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/accountsFragment"
-            android:name="io.github.johnnynanjiang.android.moneytreelight.view.AccountsFragment"
+            android:name="io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountsFragment"
             android:label="Dog Adoption">
     </fragment>
 

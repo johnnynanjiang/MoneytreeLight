@@ -1,4 +1,4 @@
-package io.github.johnnynanjiang.android.moneytreelight.view
+package io.github.johnnynanjiang.android.moneytreelight.view.accounts
 
 import android.os.Bundle
 import android.view.LayoutInflater

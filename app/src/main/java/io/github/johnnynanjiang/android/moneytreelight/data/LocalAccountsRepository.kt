@@ -13,10 +13,10 @@ class LocalAccountsRepository(private val applicationContext: Context) : Account
         private const val ACCOUNTS_FILENAME = "json/accounts.json"
     }
 
-    fun getJSON(): JSONObject =
+    private fun getJSONObject(): JSONObject =
         JSONObject(loadJSONFile())
 
-    fun loadJSONFile(): String =
+    private fun loadJSONFile(): String =
         try {
             applicationContext.assets.open(ACCOUNTS_FILENAME).bufferedReader().use { it.readText() }
         } catch (e: Exception) {
@@ -25,7 +25,7 @@ class LocalAccountsRepository(private val applicationContext: Context) : Account
 
     override fun getAccounts() =
         Observable.fromCallable<List<Account>> {
-            val json = getJSON()
+            val json = getJSONObject()
             val jsonAccounts = json.get("accounts") as JSONArray
 
             val accounts = mutableListOf<Account>()

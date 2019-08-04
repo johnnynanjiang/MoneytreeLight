@@ -1,6 +1,7 @@
-package io.github.johnnynanjiang.android.moneytreelight.view
+package io.github.johnnynanjiang.android.moneytreelight.view.accounts
 
 import com.airbnb.epoxy.Typed2EpoxyController
+import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountRow
 import io.github.johnnynanjiang.android.moneytreelight.viewmodel.Account
 
 class AccountsController : Typed2EpoxyController<List<Account>, Boolean>() {
