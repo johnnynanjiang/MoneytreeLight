@@ -6,7 +6,7 @@ import io.github.johnnynanjiang.android.moneytreelight.data.LocalTransactionsRep
 import io.github.johnnynanjiang.android.moneytreelight.util.LocalJSONFileLoader
 
 class MTLApplication : Application() {
-    val localJSONFileLoader by lazy { LocalJSONFileLoader(applicationContext) }
+    private val localJSONFileLoader by lazy { LocalJSONFileLoader(applicationContext) }
     val localAccountsRepository by lazy { LocalAccountsRepository(localJSONFileLoader) }
     val localTransactionsRepository by lazy { LocalTransactionsRepository(localJSONFileLoader) }
 }
