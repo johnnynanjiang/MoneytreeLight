@@ -2,38 +2,49 @@ package io.github.johnnynanjiang.android.moneytreelight.data
 
 import io.github.johnnynanjiang.android.moneytreelight.viewmodel.Account
 import io.reactivex.Observable
+import android.content.Context
+import org.json.JSONArray
+import org.json.JSONObject
+import java.lang.Exception
 import java.math.BigDecimal
 
-class LocalAccountsRepository : AccountsRepository {
+class LocalAccountsRepository(private val applicationContext: Context) : AccountsRepository {
+    companion object {
+        private const val ACCOUNTS_FILENAME = "json/accounts.json"
+    }
+
+    fun getJSON(): JSONObject =
+        JSONObject(loadJSONFile())
+
+    fun loadJSONFile(): String =
+        try {
+            applicationContext.assets.open(ACCOUNTS_FILENAME).bufferedReader().use { it.readText() }
+        } catch (e: Exception) {
+            throw e
+        }
+
     override fun getAccounts() =
         Observable.fromCallable<List<Account>> {
-            Thread.sleep(3)
+            val json = getJSON()
+            val jsonAccounts = json.get("accounts") as JSONArray
 
-            listOf(
-                Account(
-                    name = "name1",
-                    id = "id1",
-                    institution = "institution1",
-                    currency = "JPY",
-                    current_balance = BigDecimal("100.00"),
-                    current_balance_in_base = BigDecimal("100.00")
-                ),
-                Account(
-                    name = "name2",
-                    id = "id2",
-                    institution = "institution2",
-                    currency = "CNY",
-                    current_balance = BigDecimal("200.00"),
-                    current_balance_in_base = BigDecimal("200.00")
-                ),
-                Account(
-                    name = "name3",
-                    id = "id3",
-                    institution = "institution3",
-                    currency = "AUD",
-                    current_balance = BigDecimal("300.00"),
-                    current_balance_in_base = BigDecimal("300.00")
-                )
-            )
+            val accounts = mutableListOf<Account>()
+
+            for (i in 0..(jsonAccounts.length() - 1)) {
+                val jsonAccount = jsonAccounts.getJSONObject(i)
+                val account = with(jsonAccount) {
+                    Account(
+                        id = get("id").toString(),
+                        name = get("name").toString(),
+                        institution = get("institution").toString(),
+                        currency = get("currency").toString(),
+                        current_balance = BigDecimal(get("current_balance").toString()),
+                        current_balance_in_base = BigDecimal(get("current_balance_in_base").toString())
+                    )
+                }
+                accounts.add(account)
+            }
+
+            accounts
         }
 }

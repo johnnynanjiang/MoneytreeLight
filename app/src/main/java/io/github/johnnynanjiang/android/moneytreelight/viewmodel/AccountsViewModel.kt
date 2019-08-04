@@ -1,9 +1,9 @@
 package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 
 import com.airbnb.mvrx.*
+import io.github.johnnynanjiang.android.moneytreelight.app.MTLApplication
 import java.math.BigDecimal
 import io.github.johnnynanjiang.android.moneytreelight.data.AccountsRepository
-import io.github.johnnynanjiang.android.moneytreelight.data.LocalAccountsRepository
 import io.reactivex.schedulers.Schedulers
 
 data class Account(
@@ -27,12 +27,11 @@ class AccountsViewModel(state: AccountsState, private val accountsRepository: Ac
     companion object : MvRxViewModelFactory<AccountsViewModel, AccountsState> {
         @JvmStatic
         override fun create(viewModelContext: ViewModelContext, state: AccountsState): AccountsViewModel? {
-            val accountsRepository = LocalAccountsRepository()
-            return AccountsViewModel(state, accountsRepository)
+            return AccountsViewModel(state, viewModelContext.app<MTLApplication>().localAccountsRepository)
         }
     }
 
-    fun getAccounts() = accountsRepository.getAccounts()
+    private fun getAccounts() = accountsRepository.getAccounts()
         .subscribeOn(Schedulers.io())
         .execute { copy(accounts = it) }
 }
