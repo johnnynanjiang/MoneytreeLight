@@ -24,7 +24,7 @@ class DomainDataMappersTest {
     @Test
     fun mapAccountsFromJSONToDomain() {
         val jsonObject = LocalJSONFileLoader(appContext).getJSONObject("json/accounts.json")
-        val accounts = mapAccountsFromJSONToDomain(jsonObject)
+        val accounts = mapAccountsFromDataToDomain(jsonObject)
 
         assertEquals(3, accounts.size)
 
@@ -41,7 +41,7 @@ class DomainDataMappersTest {
     @Test
     fun mapTransactionsFromJSONToDomain() {
         val jsonObject = LocalJSONFileLoader(appContext).getJSONObject("json/transactions_2.json")
-        val transactions = mapTransactionsFromJSONToDomain(jsonObject)
+        val transactions = mapTransactionsFromDataToDomain(jsonObject)
 
         assertEquals(5, transactions.size)
 

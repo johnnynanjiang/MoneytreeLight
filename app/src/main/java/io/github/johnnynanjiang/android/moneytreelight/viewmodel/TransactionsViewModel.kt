@@ -4,7 +4,7 @@ import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.app.MTLApplication
 import io.github.johnnynanjiang.android.moneytreelight.data.TransactionsRepository
 import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
-import io.github.johnnynanjiang.android.moneytreelight.domain.mapTransactionsFromJSONToDomain
+import io.github.johnnynanjiang.android.moneytreelight.domain.mapTransactionsFromDataToDomain
 import io.reactivex.schedulers.Schedulers
 
 data class TransactionsState(val transactions: Async<List<Transaction>> = Uninitialized) : MvRxState
@@ -25,6 +25,6 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
 
     private fun getTransactionsForAccount() = transactionsRepository.getTransactionsForAccount()
         .subscribeOn(Schedulers.io())
-        .map { mapTransactionsFromJSONToDomain(it) }
+        .map { mapTransactionsFromDataToDomain(it) }
         .execute { copy(transactions = it) }
 }
