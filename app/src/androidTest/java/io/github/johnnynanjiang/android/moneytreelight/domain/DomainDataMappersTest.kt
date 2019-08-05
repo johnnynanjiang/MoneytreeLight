@@ -31,6 +31,7 @@ class DomainDataMappersTest {
         with(accounts[0]) {
             assertEquals("1", id)
             assertEquals("外貨普通(USD)", name)
+            assertEquals("Test Bank", institution)
             assertEquals("USD", currency)
             assertEquals(BigDecimal("22.5"), current_balance)
             assertEquals(BigDecimal("2306.0"), current_balance_in_base)

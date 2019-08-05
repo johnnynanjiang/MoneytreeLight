@@ -9,17 +9,35 @@ import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
 import io.github.johnnynanjiang.android.moneytreelight.R
-import kotlinx.android.synthetic.main.row_account.view.*
+import kotlinx.android.synthetic.main.view_account_item.view.*
+import kotlinx.android.synthetic.main.view_account_section_header.view.*
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
-class AccountRow @JvmOverloads constructor(
+class AccountSectionHeaderModelView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.row_account, this, true)
+        LayoutInflater.from(context).inflate(R.layout.view_account_section_header, this, true)
+    }
+
+    @TextProp
+    fun setTitle(_title: CharSequence) {
+        title.text = _title
+    }
+}
+
+@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
+class AccountItemModelView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
+
+    init {
+        LayoutInflater.from(context).inflate(R.layout.view_account_item, this, true)
     }
 
     @TextProp

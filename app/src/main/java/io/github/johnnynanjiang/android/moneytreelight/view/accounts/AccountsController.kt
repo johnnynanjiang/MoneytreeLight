@@ -10,7 +10,7 @@ import io.github.johnnynanjiang.android.moneytreelight.domain.Account
 class AccountsController(private val fragment: Fragment) : Typed2EpoxyController<List<Account>, Boolean>() {
     override fun buildModels(accounts: List<Account>?, loadingMore: Boolean?) {
         accounts?.forEach {
-            accountRow {
+            accountItemModelView {
                 id(it.id)
                 name(it.name)
                 currency(it.currency)
