@@ -10,6 +10,7 @@ import io.github.johnnynanjiang.android.moneytreelight.view.transactions.Transac
 import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionSectionHeaderView
 import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionView
 import java.util.*
+import kotlin.Comparator
 
 fun mapAccountSectionHeaderToView(title: String): AccountSectionHeaderView =
     AccountSectionHeaderView(title = title)
@@ -60,7 +61,7 @@ fun mapTransactionsFromDomainToView(transactions: List<Transaction>): List<Trans
     transactionMap.keys.forEach {
         transactionViews.add(mapTransactionSectionHeaderToView(title = DateUtil.getMonthAndYearAsString(it)))
 
-        (transactionMap[it] as List<Transaction>).sortedBy { it.date }.forEach {
+        (transactionMap[it] as List<Transaction>).sortedByDescending { it.date }.forEach {
             transactionViews.add(mapTransactionFromDomainToView(it))
         }
     }
@@ -85,5 +86,5 @@ private fun mapTransactionListToHashMap(transactions: List<Transaction>): Map<Da
         transactionHashMap.getOrPut(DateUtil.getDateWithYearAndMonthOnly(it.date)) { mutableListOf() }.add(it)
     }
 
-    return transactionHashMap.toSortedMap()
+    return transactionHashMap.toSortedMap(Comparator<Date> { o1, o2 -> o2?.compareTo(o1) ?: -1 })
 }

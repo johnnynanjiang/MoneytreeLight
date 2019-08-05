@@ -3,11 +3,12 @@ package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.app.MTLApplication
 import io.github.johnnynanjiang.android.moneytreelight.data.TransactionsRepository
-import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
 import io.github.johnnynanjiang.android.moneytreelight.domain.mapTransactionsFromDataToDomain
+import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionView
 import io.reactivex.schedulers.Schedulers
+import org.json.JSONObject
 
-data class TransactionsState(val transactions: Async<List<Transaction>> = Uninitialized) : MvRxState
+data class TransactionsState(val transactions: Async<List<TransactionView>> = Uninitialized) : MvRxState
 
 class TransactionsViewModel(state: TransactionsState, private val transactionsRepository: TransactionsRepository) :
     BaseMvRxViewModel<TransactionsState>(state, debugMode = true) {
@@ -25,6 +26,11 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
 
     private fun getTransactionsForAccount() = transactionsRepository.getTransactionsForAccount()
         .subscribeOn(Schedulers.io())
-        .map { mapTransactionsFromDataToDomain(it) }
+        .map { mapTransactionFromDataToView(it) }
         .execute { copy(transactions = it) }
+
+    private fun mapTransactionFromDataToView(jsonObject: JSONObject): List<TransactionView> =
+        mapTransactionsFromDomainToView(
+            mapTransactionsFromDataToDomain(jsonObject)
+        )
 }

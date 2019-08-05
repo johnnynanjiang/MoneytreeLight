@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_transactions.*
 
 class TransactionsFragment : BaseMvRxFragment() {
     private val viewModel: TransactionsViewModel by activityViewModel()
-    private val transactionsController = TransactionsController(fragment = this)
+    private val transactionsController = TransactionsController()
 
     companion object {
         fun arg(accountId: String): Bundle {

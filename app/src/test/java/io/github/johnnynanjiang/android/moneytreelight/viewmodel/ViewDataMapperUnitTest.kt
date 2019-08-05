@@ -4,6 +4,8 @@ import io.github.johnnynanjiang.android.moneytreelight.domain.Account
 import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountItemView
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountSectionHeaderView
+import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionItemView
+import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionSectionHeaderView
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -81,17 +83,19 @@ class ViewDataMapperUnitTest {
             )
         )
 
-        val accountModelViews = mapAccountsFromDomainToView(accounts)
+        val accountViews = mapAccountsFromDomainToView(accounts)
 
-        assertEquals(8, accountModelViews.size)
-        assertEquals("institution 1", (accountModelViews[0] as AccountSectionHeaderView).title)
-        assertEquals("1", (accountModelViews[1] as AccountItemView).id)
-        assertEquals("11", (accountModelViews[2] as AccountItemView).id)
-        assertEquals("institution 2", (accountModelViews[3] as AccountSectionHeaderView).title)
-        assertEquals("2", (accountModelViews[4] as AccountItemView).id)
-        assertEquals("institution 3", (accountModelViews[5] as AccountSectionHeaderView).title)
-        assertEquals("3", (accountModelViews[6] as AccountItemView).id)
-        assertEquals("33", (accountModelViews[7] as AccountItemView).id)
+        with(accountViews) {
+            assertEquals(8, size)
+            assertEquals("institution 1", (get(0) as AccountSectionHeaderView).title)
+            assertEquals("1", (get(1) as AccountItemView).id)
+            assertEquals("11", (get(2) as AccountItemView).id)
+            assertEquals("institution 2", (get(3) as AccountSectionHeaderView).title)
+            assertEquals("2", (get(4) as AccountItemView).id)
+            assertEquals("institution 3", (get(5) as AccountSectionHeaderView).title)
+            assertEquals("3", (get(6) as AccountItemView).id)
+            assertEquals("33", (get(7) as AccountItemView).id)
+        }
     }
 
     @Test
@@ -131,6 +135,17 @@ class ViewDataMapperUnitTest {
             )
         )
 
-        val transactionModelViews = mapTransactionsFromDomainToView(transactions)
+        val transactionViews = mapTransactionsFromDomainToView(transactions)
+
+        with(transactionViews) {
+            assertEquals(7, size)
+            assertEquals("January 2018", (get(0) as TransactionSectionHeaderView).title)
+            assertEquals("4", (get(1) as TransactionItemView).id)
+            assertEquals("June 2017", (get(2) as TransactionSectionHeaderView).title)
+            assertEquals("3", (get(3) as TransactionItemView).id)
+            assertEquals("2", (get(4) as TransactionItemView).id)
+            assertEquals("May 2017", (get(5) as TransactionSectionHeaderView).title)
+            assertEquals("1", (get(6) as TransactionItemView).id)
+        }
     }
 }
