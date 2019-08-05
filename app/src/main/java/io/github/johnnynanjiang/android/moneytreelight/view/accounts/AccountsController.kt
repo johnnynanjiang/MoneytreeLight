@@ -5,7 +5,7 @@ import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.Typed2EpoxyController
 import io.github.johnnynanjiang.android.moneytreelight.R
 import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionsFragment
-import io.github.johnnynanjiang.android.moneytreelight.viewmodel.Account
+import io.github.johnnynanjiang.android.moneytreelight.domain.Account
 
 class AccountsController(private val fragment: Fragment) : Typed2EpoxyController<List<Account>, Boolean>() {
     override fun buildModels(accounts: List<Account>?, loadingMore: Boolean?) {

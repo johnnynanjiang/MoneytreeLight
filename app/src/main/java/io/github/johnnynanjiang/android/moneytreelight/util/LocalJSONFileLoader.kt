@@ -6,7 +6,7 @@ import java.lang.Exception
 import java.lang.RuntimeException
 
 class LocalJSONFileLoader(private val applicationContext: Context) {
-    public fun getJSONObject(filepath: String): JSONObject =
+    fun getJSONObject(filepath: String): JSONObject =
         JSONObject(loadJSONFile(filepath))
 
     private fun loadJSONFile(filepath: String): String =

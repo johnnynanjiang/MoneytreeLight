@@ -3,17 +3,8 @@ package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.app.MTLApplication
 import io.github.johnnynanjiang.android.moneytreelight.data.TransactionsRepository
-import java.math.BigDecimal
+import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
 import io.reactivex.schedulers.Schedulers
-
-data class Transaction(
-    val id: String,
-    val account_id: String,
-    val amount: BigDecimal,
-    val category_id: String,
-    val date: String,
-    val description: String
-)
 
 data class TransactionsState(val transactions: Async<List<Transaction>> = Uninitialized) : MvRxState
 
