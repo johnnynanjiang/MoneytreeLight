@@ -6,7 +6,10 @@ import io.github.johnnynanjiang.android.moneytreelight.util.DateUtil
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountItemView
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountSectionHeaderView
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountView
+import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionItemView
+import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionSectionHeaderView
 import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionView
+import java.util.*
 
 fun mapAccountSectionHeaderToView(title: String): AccountSectionHeaderView =
     AccountSectionHeaderView(title = title)
@@ -23,41 +26,63 @@ fun mapAccountFromDomainToView(account: Account): AccountItemView =
 
 fun mapAccountsFromDomainToView(accounts: List<Account>): List<AccountView> {
     val accountMap = mapAccountListToHashMap(accounts)
-    val accountModelViews = mutableListOf<AccountView>()
+    val accountViews = mutableListOf<AccountView>()
 
-    for (key in accountMap.keys) {
-        accountModelViews.add(mapAccountSectionHeaderToView(title = key))
+    accountMap.keys.forEach {
+        accountViews.add(mapAccountSectionHeaderToView(title = it))
 
-        val accounts = (accountMap[key] as List<Account>).sortedBy { it.name }
-        for (account in accounts) {
-            accountModelViews.add(mapAccountFromDomainToView(account))
+        (accountMap[it] as List<Account>).sortedBy { it.name }.forEach {
+            accountViews.add(mapAccountFromDomainToView(it))
         }
     }
 
-    return accountModelViews
+    return accountViews
 }
+
+fun mapTransactionSectionHeaderToView(title: String): TransactionSectionHeaderView =
+    TransactionSectionHeaderView(title = title)
+
+fun mapTransactionFromDomainToView(transaction: Transaction): TransactionItemView =
+    with(transaction) {
+        TransactionItemView(
+            id = id,
+            amount = amount.toString(),
+            category = category_id,
+            date = date,
+            description = description
+        )
+    }
 
 fun mapTransactionsFromDomainToView(transactions: List<Transaction>): List<TransactionView> {
     val transactionMap = mapTransactionListToHashMap(transactions)
+    val transactionViews = mutableListOf<TransactionView>()
 
-    return listOf()
+    transactionMap.keys.forEach {
+        transactionViews.add(mapTransactionSectionHeaderToView(title = DateUtil.getMonthAndYearAsString(it)))
+
+        (transactionMap[it] as List<Transaction>).sortedBy { it.date }.forEach {
+            transactionViews.add(mapTransactionFromDomainToView(it))
+        }
+    }
+
+    return transactionViews
 }
 
 private fun mapAccountListToHashMap(accounts: List<Account>): Map<String, List<Account>> {
     val accountHashMap = HashMap<String, MutableList<Account>>()
 
-    for (account in accounts) {
-        accountHashMap.getOrPut(account.institution) { mutableListOf() }.add(account)
+    accounts.forEach {
+        accountHashMap.getOrPut(it.institution) { mutableListOf() }.add(it)
     }
 
     return accountHashMap.toSortedMap()
 }
 
-private fun mapTransactionListToHashMap(transactions: List<Transaction>): Map<String, List<Transaction>> {
-    val transactionHashMap = HashMap<String, MutableList<Transaction>>()
+private fun mapTransactionListToHashMap(transactions: List<Transaction>): Map<Date, List<Transaction>> {
+    val transactionHashMap = HashMap<Date, MutableList<Transaction>>()
 
-    for (transaction in transactions) {
-        transactionHashMap.getOrPut(DateUtil.getMonthAndYear(transaction.date)) { mutableListOf() }.add(transaction)
+    transactions.forEach {
+        transactionHashMap.getOrPut(DateUtil.getDateWithYearAndMonthOnly(it.date)) { mutableListOf() }.add(it)
     }
 
     return transactionHashMap.toSortedMap()

@@ -5,9 +5,9 @@ abstract class TransactionView
 class TransactionItemView(
     val id: String,
     val date: String,
+    val amount: String,
     val category: String,
-    val description: String,
-    val amount: String
+    val description: String
 ) : TransactionView()
 
 class TransactionSectionHeaderView(
