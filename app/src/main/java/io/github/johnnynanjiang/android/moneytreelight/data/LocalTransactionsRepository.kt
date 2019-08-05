@@ -1,9 +1,8 @@
 package io.github.johnnynanjiang.android.moneytreelight.data
 
-import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
-import io.github.johnnynanjiang.android.moneytreelight.domain.mapTransactionsFromJSONToDomain
 import io.reactivex.Observable
 import io.github.johnnynanjiang.android.moneytreelight.util.LocalJSONFileLoader
+import org.json.JSONObject
 
 class LocalTransactionsRepository(private val localJSONFileLoader: LocalJSONFileLoader) : TransactionsRepository {
     companion object {
@@ -11,7 +10,5 @@ class LocalTransactionsRepository(private val localJSONFileLoader: LocalJSONFile
     }
 
     override fun getTransactionsForAccount() =
-        Observable.fromCallable<List<Transaction>> {
-            mapTransactionsFromJSONToDomain(localJSONFileLoader.getJSONObject(TRANSACTIONS_FILENAME))
-        }
+        Observable.fromCallable<JSONObject> { localJSONFileLoader.getJSONObject(TRANSACTIONS_FILENAME) }
 }
