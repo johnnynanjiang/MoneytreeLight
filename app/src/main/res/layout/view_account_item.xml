@@ -3,17 +3,17 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView android:id="@+id/accountName"
+    <TextView android:id="@+id/name"
               android:layout_width="wrap_content"
               android:layout_height="match_parent"
               tools:text="account name"/>
 
-    <TextView android:id="@+id/accountCurrency"
+    <TextView android:id="@+id/currency"
               android:layout_width="wrap_content"
               android:layout_height="match_parent"
               tools:text="currency"/>
 
-    <TextView android:id="@+id/accountBalance"
+    <TextView android:id="@+id/balance"
               android:layout_width="wrap_content"
               android:layout_height="match_parent"
               tools:text="1000.00"/>

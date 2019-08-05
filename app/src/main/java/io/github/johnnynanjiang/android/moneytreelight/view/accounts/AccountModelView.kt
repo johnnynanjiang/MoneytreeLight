@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.TextProp
@@ -41,18 +42,18 @@ class AccountItemModelView @JvmOverloads constructor(
     }
 
     @TextProp
-    fun setName(name: CharSequence) {
-        accountName.text = name
+    fun setName(_name: CharSequence) {
+        name.text = _name
     }
 
     @TextProp
-    fun setCurrency(currency: CharSequence) {
-        accountCurrency.text = currency
+    fun setCurrency(_currency: CharSequence) {
+        currency.text = _currency
     }
 
     @TextProp
-    fun setBalance(balance: CharSequence) {
-        accountBalance.text = balance
+    fun setBalance(_balance: CharSequence) {
+        balance.text = _balance
     }
 
     @CallbackProp
