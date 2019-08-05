@@ -7,7 +7,7 @@ import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
 class TransactionsController(private val fragment: Fragment) : Typed2EpoxyController<List<Transaction>, Boolean>() {
     override fun buildModels(transactions: List<Transaction>?, loadingMore: Boolean?) {
         transactions?.forEach {
-            transactionRow {
+            transactionItemModelView {
                 id(it.id)
                 date(it.date)
                 category(it.category_id)

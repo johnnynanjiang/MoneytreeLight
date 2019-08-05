@@ -1,6 +1,7 @@
 package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 
 import io.github.johnnynanjiang.android.moneytreelight.domain.Account
+import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountItemView
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountSectionHeaderView
 import org.junit.Test
@@ -91,5 +92,45 @@ class ViewDataMapperUnitTest {
         assertEquals("institution 3", (accountModelViews[5] as AccountSectionHeaderView).title)
         assertEquals("3", (accountModelViews[6] as AccountItemView).id)
         assertEquals("33", (accountModelViews[7] as AccountItemView).id)
+    }
+
+    @Test
+    fun mapTransactionsFromDomainToView() {
+        val transactions = listOf(
+            Transaction(
+                id = "1",
+                account_id = "account id 1",
+                amount = BigDecimal("1"),
+                category_id = "category id 1",
+                date = "2017-05-26T00:00:00+09:00",
+                description = "description 1"
+            ),
+            Transaction(
+                id = "2",
+                account_id = "account id 2",
+                amount = BigDecimal("2"),
+                category_id = "category id 2",
+                date = "2017-06-26T00:00:00+09:00",
+                description = "description 2"
+            ),
+            Transaction(
+                id = "3",
+                account_id = "account id 3",
+                amount = BigDecimal("3"),
+                category_id = "category id 3",
+                date = "2017-06-27T00:00:00+09:00",
+                description = "description 3"
+            ),
+            Transaction(
+                id = "4",
+                account_id = "account id 4",
+                amount = BigDecimal("4"),
+                category_id = "category id 4",
+                date = "2018-01-01T00:00:00+09:00",
+                description = "description 4"
+            )
+        )
+
+        val transactionModelViews = mapTransactionsFromDomainToView(transactions)
     }
 }

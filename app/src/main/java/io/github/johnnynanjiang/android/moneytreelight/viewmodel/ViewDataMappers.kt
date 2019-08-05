@@ -1,9 +1,12 @@
 package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 
 import io.github.johnnynanjiang.android.moneytreelight.domain.Account
+import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
+import io.github.johnnynanjiang.android.moneytreelight.util.DateUtil
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountItemView
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountSectionHeaderView
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountView
+import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionView
 
 fun mapAccountSectionHeaderToView(title: String): AccountSectionHeaderView =
     AccountSectionHeaderView(title = title)
@@ -34,6 +37,12 @@ fun mapAccountsFromDomainToView(accounts: List<Account>): List<AccountView> {
     return accountModelViews
 }
 
+fun mapTransactionsFromDomainToView(transactions: List<Transaction>): List<TransactionView> {
+    val transactionMap = mapTransactionListToHashMap(transactions)
+
+    return listOf()
+}
+
 private fun mapAccountListToHashMap(accounts: List<Account>): Map<String, List<Account>> {
     val accountHashMap = HashMap<String, MutableList<Account>>()
 
@@ -42,4 +51,14 @@ private fun mapAccountListToHashMap(accounts: List<Account>): Map<String, List<A
     }
 
     return accountHashMap.toSortedMap()
+}
+
+private fun mapTransactionListToHashMap(transactions: List<Transaction>): Map<String, List<Transaction>> {
+    val transactionHashMap = HashMap<String, MutableList<Transaction>>()
+
+    for (transaction in transactions) {
+        transactionHashMap.getOrPut(DateUtil.getMonthAndYear(transaction.date)) { mutableListOf() }.add(transaction)
+    }
+
+    return transactionHashMap.toSortedMap()
 }
