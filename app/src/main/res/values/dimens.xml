@@ -2,8 +2,9 @@
 <resources>
     <dimen name="defaultMargin">16dp</dimen>
     <dimen name="smallMargin">8dp</dimen>
+    <dimen name="tinyMargin">4dp</dimen>
+    <dimen name="largeMargin">20dp</dimen>
     <dimen name="listHeaderHeight">120dp</dimen>
-    <dimen name="itemHeight">60dp</dimen>
     <dimen name="defaultTextSize">20dp</dimen>
     <dimen name="largeTextSize">40dp</dimen>
 </resources>

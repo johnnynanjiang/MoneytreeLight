@@ -26,6 +26,7 @@
 
     <style name="Item" parent="ItemInRecyclerView">
         <item name="android:textSize">@dimen/defaultTextSize</item>
+        <item name="android:layout_margin">@dimen/tinyMargin</item>
     </style>
 
 </resources>

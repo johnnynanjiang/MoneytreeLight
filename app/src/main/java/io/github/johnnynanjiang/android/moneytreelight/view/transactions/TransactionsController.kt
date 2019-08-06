@@ -4,6 +4,11 @@ import com.airbnb.epoxy.Typed2EpoxyController
 
 class TransactionsController : Typed2EpoxyController<List<TransactionView>, Boolean>() {
     override fun buildModels(transactions: List<TransactionView>?, loadingMore: Boolean?) {
+        transactionListHeaderModelView {
+            id("id")
+            total("JPY2,778")
+        }
+
         transactions?.forEach {
             when (it) {
                 is TransactionItemView -> transactionItemModelView {
