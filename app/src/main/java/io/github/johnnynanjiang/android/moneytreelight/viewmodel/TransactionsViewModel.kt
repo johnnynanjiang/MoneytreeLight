@@ -8,14 +8,12 @@ import io.github.johnnynanjiang.android.moneytreelight.view.transactions.Transac
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 
-data class TransactionsState(val transactions: Async<List<TransactionView>> = Uninitialized) : MvRxState
+data class TransactionsState(
+    val transactions: Async<List<TransactionView>> = Uninitialized
+) : MvRxState
 
 class TransactionsViewModel(state: TransactionsState, private val transactionsRepository: TransactionsRepository) :
     BaseMvRxViewModel<TransactionsState>(state, debugMode = true) {
-
-    init {
-        getTransactionsForAccount()
-    }
 
     companion object : MvRxViewModelFactory<TransactionsViewModel, TransactionsState> {
         @JvmStatic
@@ -24,10 +22,11 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
         }
     }
 
-    private fun getTransactionsForAccount() = transactionsRepository.getTransactionsForAccount()
-        .subscribeOn(Schedulers.io())
-        .map { mapTransactionFromDataToView(it) }
-        .execute { copy(transactions = it) }
+    fun getTransactionsForAccount(accountId: String) =
+        transactionsRepository.getTransactionsForAccount(accountId)
+            .subscribeOn(Schedulers.io())
+            .map { mapTransactionFromDataToView(it) }
+            .execute { copy(transactions = it) }
 
     private fun mapTransactionFromDataToView(jsonObject: JSONObject): List<TransactionView> =
         mapTransactionsFromDomainToView(

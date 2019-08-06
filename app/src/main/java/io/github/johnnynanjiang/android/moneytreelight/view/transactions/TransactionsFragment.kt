@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.airbnb.mvrx.BaseMvRxFragment
-import com.airbnb.mvrx.MvRx
-import com.airbnb.mvrx.activityViewModel
-import com.airbnb.mvrx.withState
+import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.R
 import io.github.johnnynanjiang.android.moneytreelight.viewmodel.TransactionsViewModel
 import kotlinx.android.synthetic.main.fragment_transactions.*
@@ -15,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_transactions.*
 class TransactionsFragment : BaseMvRxFragment() {
     private val viewModel: TransactionsViewModel by activityViewModel()
     private val transactionsController = TransactionsController()
+    private val accountId: String by args()
 
     companion object {
         fun arg(accountId: String): Bundle {
@@ -29,6 +27,7 @@ class TransactionsFragment : BaseMvRxFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.getTransactionsForAccount(accountId)
         transactionsRecyclerView.setController(transactionsController)
         updateData()
     }
