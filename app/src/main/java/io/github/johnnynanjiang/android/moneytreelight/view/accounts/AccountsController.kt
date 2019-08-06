@@ -8,6 +8,11 @@ import io.github.johnnynanjiang.android.moneytreelight.view.transactions.Transac
 
 class AccountsController(private val fragment: Fragment) : Typed2EpoxyController<List<AccountView>, Boolean>() {
     override fun buildModels(accounts: List<AccountView>?, loadingMore: Boolean?) {
+        accountListHeaderModelView {
+            id("id")
+            total("JPY2,778")
+        }
+
         accounts?.forEach {
             when (it) {
                 is AccountItemView -> accountItemModelView {

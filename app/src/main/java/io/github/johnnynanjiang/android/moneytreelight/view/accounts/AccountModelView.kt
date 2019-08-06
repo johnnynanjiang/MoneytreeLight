@@ -11,6 +11,24 @@ import com.airbnb.epoxy.TextProp
 import io.github.johnnynanjiang.android.moneytreelight.R
 import kotlinx.android.synthetic.main.view_account_item.view.*
 import kotlinx.android.synthetic.main.view_account_section_header.view.*
+import kotlinx.android.synthetic.main.view_account_list_header.view.*
+
+@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
+class AccountListHeaderModelView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
+
+    init {
+        LayoutInflater.from(context).inflate(R.layout.view_account_list_header, this, true)
+    }
+
+    @TextProp
+    fun setTotal(_total: CharSequence) {
+        total.text = _total
+    }
+}
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
 class AccountSectionHeaderModelView @JvmOverloads constructor(

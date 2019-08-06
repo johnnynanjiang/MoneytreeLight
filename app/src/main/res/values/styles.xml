@@ -4,16 +4,28 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="android:background">@color/appColor</item>
+        <item name="android:textColor">@color/textColor</item>
     </style>
 
-    <style name="AccountSectionHeader">
-        <item name="android:textSize">10dp</item>
+    <style name="RecyclerView">
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="ItemInRecyclerView">
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="ListHeader" parent="ItemInRecyclerView">
+        <item name="android:textSize">@dimen/largeTextSize</item>
+    </style>
+
+    <style name="SectionHeader" parent="ItemInRecyclerView">
+        <item name="android:textSize">@dimen/defaultTextSize</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TransactionSectionHeader">
-        <item name="android:textSize">10dp</item>
-        <item name="android:textStyle">bold</item>
+    <style name="Item" parent="ItemInRecyclerView">
+        <item name="android:textSize">@dimen/defaultTextSize</item>
     </style>
 
 </resources>
