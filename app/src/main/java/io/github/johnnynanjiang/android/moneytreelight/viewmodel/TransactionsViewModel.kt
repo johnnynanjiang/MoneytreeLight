@@ -25,11 +25,11 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
     fun getTransactionsForAccount(accountId: String) =
         transactionsRepository.getTransactionsForAccount(accountId)
             .subscribeOn(Schedulers.io())
-            .map { mapTransactionFromDataToView(it) }
+            .map { mapTransactionFromDataToPresentation(it) }
             .execute { copy(transactions = it) }
 
-    private fun mapTransactionFromDataToView(jsonObject: JSONObject): List<TransactionView> =
-        mapTransactionsFromDomainToView(
+    private fun mapTransactionFromDataToPresentation(jsonObject: JSONObject): List<TransactionView> =
+        mapTransactionsFromDomainToPresentation(
             mapTransactionsFromDataToDomain(jsonObject)
         )
 }

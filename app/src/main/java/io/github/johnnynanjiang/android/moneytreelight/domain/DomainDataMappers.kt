@@ -49,3 +49,6 @@ fun mapTransactionsFromDataToDomain(jsonObject: JSONObject): List<Transaction> {
 
     return transactions
 }
+
+fun getTotalBalanceFromAccounts(accounts: List<Account>): String =
+    accounts.map { it.current_balance }.reduce { totalBalance, balance -> totalBalance + balance }.toString()

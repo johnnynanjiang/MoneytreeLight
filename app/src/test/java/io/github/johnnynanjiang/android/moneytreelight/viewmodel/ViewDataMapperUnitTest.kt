@@ -83,7 +83,7 @@ class ViewDataMapperUnitTest {
             )
         )
 
-        val accountViews = mapAccountsFromDomainToView(accounts)
+        val accountViews = mapAccountsFromDomainToPresentation(accounts)
 
         with(accountViews) {
             assertEquals(8, size)
@@ -135,7 +135,7 @@ class ViewDataMapperUnitTest {
             )
         )
 
-        val transactionViews = mapTransactionsFromDomainToView(transactions)
+        val transactionViews = mapTransactionsFromDomainToPresentation(transactions)
 
         with(transactionViews) {
             assertEquals(7, size)

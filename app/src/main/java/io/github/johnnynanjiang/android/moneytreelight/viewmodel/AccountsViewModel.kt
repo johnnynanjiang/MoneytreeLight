@@ -3,12 +3,16 @@ package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.app.MTLApplication
 import io.github.johnnynanjiang.android.moneytreelight.data.AccountsRepository
+import io.github.johnnynanjiang.android.moneytreelight.domain.Account
+import io.github.johnnynanjiang.android.moneytreelight.domain.getTotalBalanceFromAccounts
 import io.github.johnnynanjiang.android.moneytreelight.domain.mapAccountsFromDataToDomain
 import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountView
 import io.reactivex.schedulers.Schedulers
-import org.json.JSONObject
 
-data class AccountsState(val accounts: Async<List<AccountView>> = Uninitialized) : MvRxState
+data class AccountsState(
+    val accounts: Async<List<AccountView>> = Uninitialized,
+    val totalBalance: String = ""
+) : MvRxState
 
 class AccountsViewModel(state: AccountsState, private val accountsRepository: AccountsRepository) :
     BaseMvRxViewModel<AccountsState>(state, debugMode = true) {
@@ -26,11 +30,11 @@ class AccountsViewModel(state: AccountsState, private val accountsRepository: Ac
 
     private fun getAccounts() = accountsRepository.getAccounts()
         .subscribeOn(Schedulers.io())
-        .map { mapAccountsFromDataToView(it) }
+        .map {
+            val domainAccounts = mapAccountsFromDataToDomain(it)
+            setState { copy(totalBalance = getTotalBalanceFromAccounts(domainAccounts)) }
+            domainAccounts
+        }
+        .map { mapAccountsFromDomainToPresentation(it) }
         .execute { copy(accounts = it) }
-
-    private fun mapAccountsFromDataToView(jsonObject: JSONObject): List<AccountView> =
-        mapAccountsFromDomainToView(
-            mapAccountsFromDataToDomain(jsonObject)
-        )
 }

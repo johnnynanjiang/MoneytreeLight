@@ -22,7 +22,7 @@ class DomainDataMappersTest {
     }
 
     @Test
-    fun mapAccountsFromJSONToDomain() {
+    fun shouldMapAccountsFromJSONDataToDomainData() {
         val jsonObject = LocalJSONFileLoader(appContext).getJSONObject("json/accounts.json")
         val accounts = mapAccountsFromDataToDomain(jsonObject)
 
@@ -39,7 +39,7 @@ class DomainDataMappersTest {
     }
 
     @Test
-    fun mapTransactionsFromJSONToDomain() {
+    fun shouldMapTransactionsFromJSONDataToDomainData() {
         val jsonObject = LocalJSONFileLoader(appContext).getJSONObject("json/transactions_2.json")
         val transactions = mapTransactionsFromDataToDomain(jsonObject)
 
@@ -53,5 +53,13 @@ class DomainDataMappersTest {
             assertEquals("2017-05-26T00:00:00+09:00", date)
             assertEquals("スターバックス 原宿店", description)
         }
+    }
+
+    @Test
+    fun shouldGetTotalBalanceFromAccounts() {
+        val jsonObject = LocalJSONFileLoader(appContext).getJSONObject("json/accounts.json")
+        val accounts = mapAccountsFromDataToDomain(jsonObject)
+
+        assertEquals("3057.5", getTotalBalanceFromAccounts(accounts))
     }
 }

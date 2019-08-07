@@ -29,6 +29,6 @@ class AccountsFragment : BaseMvRxFragment() {
     }
 
     private fun updateData() = withState(viewModel) { state ->
-        accountsController.setData(state.accounts.invoke(), false)
+        accountsController.setData(state)
     }
 }

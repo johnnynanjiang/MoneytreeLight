@@ -25,7 +25,7 @@ fun mapAccountFromDomainToView(account: Account): AccountItemView =
         )
     }
 
-fun mapAccountsFromDomainToView(accounts: List<Account>): List<AccountView> {
+fun mapAccountsFromDomainToPresentation(accounts: List<Account>): List<AccountView> {
     val accountMap = mapAccountListToHashMap(accounts)
     val accountViews = mutableListOf<AccountView>()
 
@@ -54,7 +54,7 @@ fun mapTransactionFromDomainToView(transaction: Transaction): TransactionItemVie
         )
     }
 
-fun mapTransactionsFromDomainToView(transactions: List<Transaction>): List<TransactionView> {
+fun mapTransactionsFromDomainToPresentation(transactions: List<Transaction>): List<TransactionView> {
     val transactionMap = mapTransactionListToHashMap(transactions)
     val transactionViews = mutableListOf<TransactionView>()
 

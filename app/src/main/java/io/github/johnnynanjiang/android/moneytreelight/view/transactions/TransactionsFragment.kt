@@ -37,6 +37,6 @@ class TransactionsFragment : BaseMvRxFragment() {
     }
 
     private fun updateData() = withState(viewModel) { state ->
-        transactionsController.setData(state.transactions.invoke(), false)
+        transactionsController.setData(state.transactions.invoke())
     }
 }
