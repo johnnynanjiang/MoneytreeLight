@@ -22,6 +22,6 @@ class DateUtil {
         }
 
         private fun getDateFromString(pattern: String, dateString: String): Date =
-            SimpleDateFormat(pattern).parse(dateString)
+            SimpleDateFormat(pattern, Locale.JAPAN).parse(dateString)
     }
 }
