@@ -49,7 +49,7 @@ fun mapTransactionFromDomainToPresentation(transaction: Transaction): Transactio
             id = id,
             amount = amount.toString(),
             category = category_id,
-            date = date,
+            date = DateUtil.getDayAsString(date),
             description = description
         )
     }

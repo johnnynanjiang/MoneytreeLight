@@ -19,6 +19,7 @@
               android:layout_weight="1"
               android:lines="1"
               style="@style/Item"
+              android:visibility="invisible"
               tools:text="transaction category"/>
 
     <TextView android:id="@+id/description"

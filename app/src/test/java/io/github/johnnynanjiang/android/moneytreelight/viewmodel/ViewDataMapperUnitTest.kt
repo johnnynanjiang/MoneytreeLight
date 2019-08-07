@@ -102,6 +102,28 @@ class ViewDataMapperUnitTest {
     }
 
     @Test
+    fun shouldMapTransactionFromDomainToPresentation() {
+        val transactionItemView = mapTransactionFromDomainToPresentation(
+            Transaction(
+                id = "1",
+                account_id = "account id 1",
+                amount = BigDecimal("1"),
+                category_id = "1",
+                date = "2018-01-01T00:00:00+09:00",
+                description = "description 1"
+            )
+        )
+
+        with(transactionItemView) {
+            assertEquals("1", id)
+            assertEquals("1st", date)
+            assertEquals("1", amount)
+            assertEquals("1", category)
+            assertEquals("description 1", description)
+        }
+    }
+
+    @Test
     fun shouldMapTransactionsFromDomainToPresentation() {
         val transactions = listOf(
             Transaction(
