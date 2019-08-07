@@ -14,8 +14,8 @@
               tools:text="transaction section header"/>
 
     <View android:background="@color/textColor"
-          android:layout_marginTop="@dimen/smallMargin"
           android:layout_width="match_parent"
+          android:layout_marginTop="@dimen/smallMargin"
           android:layout_height="1dp"/>
 
 </LinearLayout>
