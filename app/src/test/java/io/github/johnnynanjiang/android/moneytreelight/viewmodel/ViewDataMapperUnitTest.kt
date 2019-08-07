@@ -2,10 +2,10 @@ package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 
 import io.github.johnnynanjiang.android.moneytreelight.domain.Account
 import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
-import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountItemView
-import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountSectionHeaderView
-import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionItemView
-import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionSectionHeaderView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.accounts.AccountItemView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.accounts.AccountSectionHeaderView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionItemView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionSectionHeaderView
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -13,13 +13,16 @@ import java.math.BigDecimal
 
 class ViewDataMapperUnitTest {
     @Test
-    fun mapAccountSectionHeaderToView() {
-        assertEquals("account section header", mapAccountSectionHeaderToView(title = "account section header").title)
+    fun shouldMapAccountSectionHeaderFromDomainToPresentation() {
+        assertEquals(
+            "account section header",
+            mapAccountSectionHeaderForPresentation(title = "account section header").title
+        )
     }
 
     @Test
-    fun mapAccountFromDomainToView() {
-        val accountItemView = mapAccountFromDomainToView(
+    fun shouldMapAccountFromDomainToPresentation() {
+        val accountItemView = mapAccountFromDomainToPresentation(
             Account(
                 id = "1",
                 name = "name 1",
@@ -39,7 +42,7 @@ class ViewDataMapperUnitTest {
     }
 
     @Test
-    fun mapAccountsFromDomainToView() {
+    fun shouldMapAccountsFromDomainToPresentation() {
         val accounts = listOf(
             Account(
                 id = "3",
@@ -99,7 +102,7 @@ class ViewDataMapperUnitTest {
     }
 
     @Test
-    fun mapTransactionsFromDomainToView() {
+    fun shouldMapTransactionsFromDomainToPresentation() {
         val transactions = listOf(
             Transaction(
                 id = "1",

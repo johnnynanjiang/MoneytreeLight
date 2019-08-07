@@ -1,4 +1,4 @@
-package io.github.johnnynanjiang.android.moneytreelight.view.accounts
+package io.github.johnnynanjiang.android.moneytreelight.presentation.accounts
 
 abstract class AccountView
 

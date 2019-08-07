@@ -4,7 +4,7 @@ import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.app.MTLApplication
 import io.github.johnnynanjiang.android.moneytreelight.data.TransactionsRepository
 import io.github.johnnynanjiang.android.moneytreelight.domain.mapTransactionsFromDataToDomain
-import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionView
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 

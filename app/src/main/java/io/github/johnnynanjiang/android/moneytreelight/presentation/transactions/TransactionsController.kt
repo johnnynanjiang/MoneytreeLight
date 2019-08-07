@@ -1,4 +1,4 @@
-package io.github.johnnynanjiang.android.moneytreelight.view.transactions
+package io.github.johnnynanjiang.android.moneytreelight.presentation.transactions
 
 import com.airbnb.epoxy.TypedEpoxyController
 
@@ -6,7 +6,7 @@ class TransactionsController : TypedEpoxyController<List<TransactionView>>() {
     override fun buildModels(transactions: List<TransactionView>?) {
         transactionListHeaderModelView {
             id("id")
-            total("JPY2,778")
+            total("JPY1,234")
         }
 
         transactions?.forEach {

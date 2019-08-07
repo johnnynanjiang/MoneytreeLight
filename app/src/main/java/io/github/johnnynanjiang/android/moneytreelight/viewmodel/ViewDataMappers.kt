@@ -3,19 +3,19 @@ package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 import io.github.johnnynanjiang.android.moneytreelight.domain.Account
 import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
 import io.github.johnnynanjiang.android.moneytreelight.util.DateUtil
-import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountItemView
-import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountSectionHeaderView
-import io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountView
-import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionItemView
-import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionSectionHeaderView
-import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.accounts.AccountItemView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.accounts.AccountSectionHeaderView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.accounts.AccountView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionItemView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionSectionHeaderView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionView
 import java.util.*
 import kotlin.Comparator
 
-fun mapAccountSectionHeaderToView(title: String): AccountSectionHeaderView =
+fun mapAccountSectionHeaderForPresentation(title: String): AccountSectionHeaderView =
     AccountSectionHeaderView(title = title)
 
-fun mapAccountFromDomainToView(account: Account): AccountItemView =
+fun mapAccountFromDomainToPresentation(account: Account): AccountItemView =
     with(account) {
         AccountItemView(
             id = id,
@@ -30,20 +30,20 @@ fun mapAccountsFromDomainToPresentation(accounts: List<Account>): List<AccountVi
     val accountViews = mutableListOf<AccountView>()
 
     accountMap.keys.forEach {
-        accountViews.add(mapAccountSectionHeaderToView(title = it))
+        accountViews.add(mapAccountSectionHeaderForPresentation(title = it))
 
         (accountMap[it] as List<Account>).sortedBy { it.name }.forEach {
-            accountViews.add(mapAccountFromDomainToView(it))
+            accountViews.add(mapAccountFromDomainToPresentation(it))
         }
     }
 
     return accountViews
 }
 
-fun mapTransactionSectionHeaderToView(title: String): TransactionSectionHeaderView =
+fun mapTransactionSectionHeaderForPresentation(title: String): TransactionSectionHeaderView =
     TransactionSectionHeaderView(title = title)
 
-fun mapTransactionFromDomainToView(transaction: Transaction): TransactionItemView =
+fun mapTransactionFromDomainToPresentation(transaction: Transaction): TransactionItemView =
     with(transaction) {
         TransactionItemView(
             id = id,
@@ -59,10 +59,10 @@ fun mapTransactionsFromDomainToPresentation(transactions: List<Transaction>): Li
     val transactionViews = mutableListOf<TransactionView>()
 
     transactionMap.keys.forEach {
-        transactionViews.add(mapTransactionSectionHeaderToView(title = DateUtil.getMonthAndYearAsString(it)))
+        transactionViews.add(mapTransactionSectionHeaderForPresentation(title = DateUtil.getMonthAndYearAsString(it)))
 
         (transactionMap[it] as List<Transaction>).sortedByDescending { it.date }.forEach {
-            transactionViews.add(mapTransactionFromDomainToView(it))
+            transactionViews.add(mapTransactionFromDomainToPresentation(it))
         }
     }
 

@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/accountsFragment"
-            android:name="io.github.johnnynanjiang.android.moneytreelight.view.accounts.AccountsFragment"
+            android:name="io.github.johnnynanjiang.android.moneytreelight.presentation.accounts.AccountsFragment"
             android:label="Accounts">
         <action
                 android:id="@+id/action_accounts_to_transactions"
@@ -19,6 +19,6 @@
 
     <fragment
             android:id="@+id/transactionsFragment"
-            android:name="io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionsFragment"
+            android:name="io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionsFragment"
             android:label="Transactions"/>
 </navigation>

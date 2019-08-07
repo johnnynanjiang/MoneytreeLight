@@ -12,7 +12,7 @@ import org.junit.Assert.*
 @RunWith(AndroidJUnit4::class)
 class LocalJSONFileLoaderTest {
     @Test
-    fun loadJSONObjectFromFile() {
+    fun shouldLoadJSONObjectFromAssetFile() {
         val appContext = InstrumentationRegistry.getTargetContext()
         val localJSONFileLoader = LocalJSONFileLoader(appContext)
         val jsonObject = localJSONFileLoader.getJSONObject("json/accounts.json")

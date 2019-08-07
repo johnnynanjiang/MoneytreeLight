@@ -1,10 +1,10 @@
-package io.github.johnnynanjiang.android.moneytreelight.view.accounts
+package io.github.johnnynanjiang.android.moneytreelight.presentation.accounts
 
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.TypedEpoxyController
 import io.github.johnnynanjiang.android.moneytreelight.R
-import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionsFragment
+import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionsFragment
 import io.github.johnnynanjiang.android.moneytreelight.viewmodel.AccountsState
 
 class AccountsController(private val fragment: Fragment) : TypedEpoxyController<AccountsState>() {

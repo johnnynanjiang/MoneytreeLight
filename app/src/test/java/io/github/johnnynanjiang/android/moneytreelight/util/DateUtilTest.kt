@@ -5,12 +5,12 @@ import org.junit.Test
 
 class DateUtilTest {
     @Test
-    fun getMonthAndYearAsString() {
+    fun shouldGetMonthAndYearStringFromADateString() {
         assertEquals("May 2017", DateUtil.getMonthAndYearAsString("2017-05-26T00:00:00+09:00"))
     }
 
     @Test
-    fun getMonthAndYearAsStringFromDate() {
+    fun shouldGetMonthAndYearStringFromADateWithYearAndMonthOnly() {
         assertEquals(
             "May 2017",
             DateUtil.getMonthAndYearAsString(DateUtil.getDateWithYearAndMonthOnly("2017-05-26T00:00:00+09:00"))
@@ -18,7 +18,7 @@ class DateUtilTest {
     }
 
     @Test
-    fun getDateWithYearAndMonthOnly() {
+    fun shouldGetDateWithYearAndMonthOnlyFromADateString() {
         with(DateUtil) {
             assertFalse(getDateWithYearAndMonthOnly("2017-05-26T00:00:00+09:00") > getDateWithYearAndMonthOnly("2017-05-26T00:00:00+09:00"))
             assertFalse(getDateWithYearAndMonthOnly("2017-05-26T10:00:00+09:00") > getDateWithYearAndMonthOnly("2017-05-26T00:00:00+09:00"))

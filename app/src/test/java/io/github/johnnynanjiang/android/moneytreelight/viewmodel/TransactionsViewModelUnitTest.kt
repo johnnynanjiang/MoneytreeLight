@@ -9,7 +9,7 @@ import org.mockito.Mockito.verify
 
 class TransactionsViewModelUnitTest {
     @Test
-    fun getTransactionsForAccount() {
+    fun shouldGetTransactionsByAccountId() {
         val mockTransactionsRepository: TransactionsRepository = Mockito.mock(TransactionsRepository::class.java)
         val viewModel = TransactionsViewModel(
             state = TransactionsState(),

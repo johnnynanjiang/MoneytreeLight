@@ -1,4 +1,4 @@
-package io.github.johnnynanjiang.android.moneytreelight.view.transactions
+package io.github.johnnynanjiang.android.moneytreelight.presentation.transactions
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,4 +1,4 @@
-package io.github.johnnynanjiang.android.moneytreelight.view.accounts
+package io.github.johnnynanjiang.android.moneytreelight.presentation.accounts
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,10 +21,10 @@ class AccountsFragment : BaseMvRxFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         accountsRecyclerView.setController(accountsController)
-        updateData()
+        viewModel.getAccounts()
     }
 
-    override fun invalidate() = withState(viewModel) { state ->
+    override fun invalidate() = withState(viewModel) { _ ->
         updateData()
     }
 

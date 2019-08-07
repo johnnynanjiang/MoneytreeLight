@@ -1,4 +1,4 @@
-package io.github.johnnynanjiang.android.moneytreelight.view
+package io.github.johnnynanjiang.android.moneytreelight.presentation
 
 import android.os.Bundle
 import com.airbnb.mvrx.BaseMvRxActivity

@@ -1,4 +1,4 @@
-package io.github.johnnynanjiang.android.moneytreelight.view.transactions
+package io.github.johnnynanjiang.android.moneytreelight.presentation.transactions
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,7 +32,7 @@ class TransactionsFragment : BaseMvRxFragment() {
         updateData()
     }
 
-    override fun invalidate() = withState(viewModel) { state ->
+    override fun invalidate() = withState(viewModel) { _ ->
         updateData()
     }
 

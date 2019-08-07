@@ -1,7 +1,7 @@
 package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 
 import com.airbnb.mvrx.Success
-import io.github.johnnynanjiang.android.moneytreelight.view.transactions.TransactionItemView
+import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionItemView
 import org.junit.Assert
 import org.junit.Test
 
