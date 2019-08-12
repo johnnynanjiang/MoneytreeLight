@@ -1,13 +1,13 @@
 package io.github.johnnynanjiang.android.moneytreelight.presentation.transactions
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.R
 import io.github.johnnynanjiang.android.moneytreelight.viewmodel.TransactionsViewModel
 import kotlinx.android.synthetic.main.fragment_transactions.*
+
+
 
 class TransactionsFragment : BaseMvRxFragment() {
     private val viewModel: TransactionsViewModel by activityViewModel()
@@ -20,6 +20,11 @@ class TransactionsFragment : BaseMvRxFragment() {
             args.putString(MvRx.KEY_ARG, accountId)
             return args
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

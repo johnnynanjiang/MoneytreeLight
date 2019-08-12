@@ -4,7 +4,6 @@ import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.app.MTLApplication
 import io.github.johnnynanjiang.android.moneytreelight.data.AccountsRepository
 import io.github.johnnynanjiang.android.moneytreelight.data.getTotalBalanceFromAccounts
-import io.github.johnnynanjiang.android.moneytreelight.data.mapAccountsFromDataToDomain
 import io.github.johnnynanjiang.android.moneytreelight.presentation.accounts.AccountView
 import io.reactivex.schedulers.Schedulers
 

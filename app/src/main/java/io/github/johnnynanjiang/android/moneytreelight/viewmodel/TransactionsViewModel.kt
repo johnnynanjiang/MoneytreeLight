@@ -2,6 +2,7 @@ package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 
 import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.app.MTLApplication
+import io.github.johnnynanjiang.android.moneytreelight.data.Transaction
 import io.github.johnnynanjiang.android.moneytreelight.data.TransactionsRepository
 import io.github.johnnynanjiang.android.moneytreelight.data.mapTransactionsFromDataToDomain
 import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionView
@@ -27,6 +28,11 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
             .subscribeOn(Schedulers.io())
             .map { mapTransactionFromDataToPresentation(it) }
             .execute { copy(transactions = it) }
+
+    fun search(transactions: List<Transaction>, query: String) =
+        transactions.filter { transaction ->
+            transaction.description.contains(query)
+        }
 
     private fun mapTransactionFromDataToPresentation(jsonObject: JSONObject): List<TransactionView> =
         mapTransactionsFromDomainToPresentation(
