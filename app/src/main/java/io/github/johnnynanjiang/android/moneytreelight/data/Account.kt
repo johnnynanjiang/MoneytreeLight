@@ -2,6 +2,10 @@ package io.github.johnnynanjiang.android.moneytreelight.data
 
 import java.math.BigDecimal
 
+data class Accounts(
+    val accounts: List<Account>
+)
+
 data class Account(
     val id: String,
     val name: String,

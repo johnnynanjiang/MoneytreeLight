@@ -4,7 +4,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.math.BigDecimal
 
-fun mapAccountsFromDataToDomain(jsonObject: JSONObject): List<Account> {
+fun mapAccountsFromDataToDomain(jsonObject: JSONObject): Accounts {
     val jsonAccounts = jsonObject.get("accounts") as JSONArray
 
     val accounts = mutableListOf<Account>()
@@ -24,7 +24,7 @@ fun mapAccountsFromDataToDomain(jsonObject: JSONObject): List<Account> {
         accounts.add(account)
     }
 
-    return accounts
+    return Accounts(accounts = accounts)
 }
 
 fun mapTransactionsFromDataToDomain(jsonObject: JSONObject): List<Transaction> {

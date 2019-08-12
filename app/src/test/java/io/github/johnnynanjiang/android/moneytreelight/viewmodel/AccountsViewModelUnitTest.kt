@@ -1,5 +1,6 @@
 package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 
+import io.github.johnnynanjiang.android.moneytreelight.data.Accounts
 import io.github.johnnynanjiang.android.moneytreelight.data.AccountsRepository
 import io.reactivex.Observable
 import org.json.JSONObject
@@ -17,7 +18,7 @@ class AccountsViewModelUnitTest {
         )
 
         Mockito.`when`(mockAccountsRepository.getAccounts())
-            .thenReturn(Observable.fromCallable { JSONObject() })
+            .thenReturn(Observable.fromCallable { Accounts(accounts = listOf()) })
 
         viewModel.getAccounts()
 

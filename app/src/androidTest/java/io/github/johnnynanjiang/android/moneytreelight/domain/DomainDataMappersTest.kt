@@ -29,9 +29,9 @@ class DomainDataMappersTest {
         val jsonObject = LocalJSONFileLoader(appContext).getJSONObject("json/accounts.json")
         val accounts = mapAccountsFromDataToDomain(jsonObject)
 
-        assertEquals(3, accounts.size)
+        assertEquals(3, accounts.accounts.size)
 
-        with(accounts[0]) {
+        with(accounts.accounts[0]) {
             assertEquals("1", id)
             assertEquals("外貨普通(USD)", name)
             assertEquals("Test Bank", institution)
@@ -64,8 +64,9 @@ class DomainDataMappersTest {
         val jsonObject = LocalJSONFileLoader(appContext).getJSONObject("json/accounts.json")
         val accounts = mapAccountsFromDataToDomain(jsonObject)
 
-        assertEquals("3057.5",
-            getTotalBalanceFromAccounts(accounts)
+        assertEquals(
+            "3057.5",
+            getTotalBalanceFromAccounts(accounts.accounts)
         )
     }
 }

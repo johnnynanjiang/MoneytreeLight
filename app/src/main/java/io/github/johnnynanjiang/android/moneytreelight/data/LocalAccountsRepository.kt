@@ -9,7 +9,7 @@ class LocalAccountsRepository(private val localJSONFileLoader: LocalJSONFileLoad
     }
 
     override fun getAccounts() =
-        Observable.fromCallable<List<Account>> {
+        Observable.fromCallable<Accounts> {
             mapAccountsFromDataToDomain(localJSONFileLoader.getJSONObject(ACCOUNTS_FILENAME))
         }
 }

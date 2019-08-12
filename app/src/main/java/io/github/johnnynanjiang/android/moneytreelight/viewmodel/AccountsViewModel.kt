@@ -19,16 +19,19 @@ class AccountsViewModel(state: AccountsState, private val accountsRepository: Ac
     companion object : MvRxViewModelFactory<AccountsViewModel, AccountsState> {
         @JvmStatic
         override fun create(viewModelContext: ViewModelContext, state: AccountsState): AccountsViewModel? {
-            return AccountsViewModel(state, viewModelContext.app<MTLApplication>().localAccountsRepository)
+            return AccountsViewModel(state, viewModelContext.app<MTLApplication>().remoteAccountsRepository)
         }
     }
 
     fun getAccounts() = accountsRepository.getAccounts()
+        .doOnError {
+            it.printStackTrace()
+        }
         .subscribeOn(Schedulers.io())
         .map {
-            setState { copy(totalBalance = getTotalBalanceFromAccounts(it)) }
+            setState { copy(totalBalance = getTotalBalanceFromAccounts(it.accounts)) }
             it
         }
-        .map { mapAccountsFromDomainToPresentation(it) }
+        .map { mapAccountsFromDomainToPresentation(it.accounts) }
         .execute { copy(accounts = it) }
 }
