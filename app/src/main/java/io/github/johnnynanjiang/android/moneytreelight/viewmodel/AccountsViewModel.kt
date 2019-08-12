@@ -3,8 +3,8 @@ package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.app.MTLApplication
 import io.github.johnnynanjiang.android.moneytreelight.data.AccountsRepository
-import io.github.johnnynanjiang.android.moneytreelight.domain.getTotalBalanceFromAccounts
-import io.github.johnnynanjiang.android.moneytreelight.domain.mapAccountsFromDataToDomain
+import io.github.johnnynanjiang.android.moneytreelight.data.getTotalBalanceFromAccounts
+import io.github.johnnynanjiang.android.moneytreelight.data.mapAccountsFromDataToDomain
 import io.github.johnnynanjiang.android.moneytreelight.presentation.accounts.AccountView
 import io.reactivex.schedulers.Schedulers
 
@@ -26,9 +26,8 @@ class AccountsViewModel(state: AccountsState, private val accountsRepository: Ac
     fun getAccounts() = accountsRepository.getAccounts()
         .subscribeOn(Schedulers.io())
         .map {
-            val domainAccounts = mapAccountsFromDataToDomain(it)
-            setState { copy(totalBalance = getTotalBalanceFromAccounts(domainAccounts)) }
-            domainAccounts
+            setState { copy(totalBalance = getTotalBalanceFromAccounts(it)) }
+            it
         }
         .map { mapAccountsFromDomainToPresentation(it) }
         .execute { copy(accounts = it) }

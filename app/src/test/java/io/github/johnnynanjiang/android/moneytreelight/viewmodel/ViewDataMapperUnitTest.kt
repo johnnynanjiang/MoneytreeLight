@@ -1,7 +1,7 @@
 package io.github.johnnynanjiang.android.moneytreelight.viewmodel
 
-import io.github.johnnynanjiang.android.moneytreelight.domain.Account
-import io.github.johnnynanjiang.android.moneytreelight.domain.Transaction
+import io.github.johnnynanjiang.android.moneytreelight.data.Account
+import io.github.johnnynanjiang.android.moneytreelight.data.Transaction
 import io.github.johnnynanjiang.android.moneytreelight.presentation.accounts.AccountItemView
 import io.github.johnnynanjiang.android.moneytreelight.presentation.accounts.AccountSectionHeaderView
 import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions.TransactionItemView

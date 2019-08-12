@@ -3,6 +3,9 @@ package io.github.johnnynanjiang.android.moneytreelight.domain
 import android.content.Context
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import io.github.johnnynanjiang.android.moneytreelight.data.getTotalBalanceFromAccounts
+import io.github.johnnynanjiang.android.moneytreelight.data.mapAccountsFromDataToDomain
+import io.github.johnnynanjiang.android.moneytreelight.data.mapTransactionsFromDataToDomain
 import io.github.johnnynanjiang.android.moneytreelight.util.LocalJSONFileLoader
 
 import org.junit.Test
@@ -41,7 +44,8 @@ class DomainDataMappersTest {
     @Test
     fun shouldMapTransactionsFromJSONDataToDomainData() {
         val jsonObject = LocalJSONFileLoader(appContext).getJSONObject("json/transactions_2.json")
-        val transactions = mapTransactionsFromDataToDomain(jsonObject)
+        val transactions =
+            mapTransactionsFromDataToDomain(jsonObject)
 
         assertEquals(5, transactions.size)
 
@@ -60,6 +64,8 @@ class DomainDataMappersTest {
         val jsonObject = LocalJSONFileLoader(appContext).getJSONObject("json/accounts.json")
         val accounts = mapAccountsFromDataToDomain(jsonObject)
 
-        assertEquals("3057.5", getTotalBalanceFromAccounts(accounts))
+        assertEquals("3057.5",
+            getTotalBalanceFromAccounts(accounts)
+        )
     }
 }
