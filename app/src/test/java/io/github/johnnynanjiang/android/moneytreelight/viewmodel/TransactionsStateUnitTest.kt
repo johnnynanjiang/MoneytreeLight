@@ -15,8 +15,8 @@ class TransactionsStateUnitTest {
             category = "category",
             description = "description"
         )
-        val state = TransactionsState(transactions = Success(listOf(transactionView)))
+        val state = TransactionsState(transactionsRequest = Success(listOf(transactionView)))
 
-        Assert.assertEquals(1, state.transactions.invoke()?.size)
+        Assert.assertEquals(1, state.transactionsRequest()?.size)
     }
 }
