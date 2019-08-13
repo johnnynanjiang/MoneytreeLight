@@ -1,7 +1,10 @@
 package io.github.johnnynanjiang.android.moneytreelight.presentation.transactions
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.R
 import io.github.johnnynanjiang.android.moneytreelight.viewmodel.TransactionsViewModel
@@ -37,6 +40,15 @@ class TransactionsFragment : BaseMvRxFragment() {
 
     override fun invalidate() = withState(viewModel) { _ ->
         updateData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.transaction_search, menu)
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.id.search).actionView as SearchView
+        searchView.setSearchableInfo(
+            searchManager.getSearchableInfo(activity?.componentName)
+        )
     }
 
     private fun updateData() = withState(viewModel) { state ->

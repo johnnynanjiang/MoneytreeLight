@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
-import com.airbnb.mvrx.existingViewModel
 import com.airbnb.mvrx.withState
 import io.github.johnnynanjiang.android.moneytreelight.R
 import io.github.johnnynanjiang.android.moneytreelight.viewmodel.TransactionsViewModel
