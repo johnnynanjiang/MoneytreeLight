@@ -7,8 +7,6 @@ import io.github.johnnynanjiang.android.moneytreelight.R
 import io.github.johnnynanjiang.android.moneytreelight.viewmodel.TransactionsViewModel
 import kotlinx.android.synthetic.main.fragment_transactions.*
 
-
-
 class TransactionsFragment : BaseMvRxFragment() {
     private val viewModel: TransactionsViewModel by activityViewModel()
     private val transactionsController = TransactionsController()

@@ -31,7 +31,7 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
 
     fun search(transactions: List<Transaction>, query: String) =
         transactions.filter { transaction ->
-            transaction.description.contains(query)
+            transaction.description.contains(query) || transaction.amount.toString().contains(query)
         }
 
     private fun mapTransactionFromDataToPresentation(jsonObject: JSONObject): List<TransactionView> =
