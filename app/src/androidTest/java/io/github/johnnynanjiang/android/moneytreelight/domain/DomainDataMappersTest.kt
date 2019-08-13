@@ -1,8 +1,8 @@
 package io.github.johnnynanjiang.android.moneytreelight.domain
 
 import android.content.Context
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import io.github.johnnynanjiang.android.moneytreelight.data.getTotalBalanceFromAccounts
 import io.github.johnnynanjiang.android.moneytreelight.data.mapAccountsFromDataToDomain
 import io.github.johnnynanjiang.android.moneytreelight.data.mapTransactionsFromDataToDomain
@@ -17,7 +17,7 @@ import java.math.BigDecimal
 
 @RunWith(AndroidJUnit4::class)
 class DomainDataMappersTest {
-    lateinit var appContext: Context
+    private lateinit var appContext: Context
 
     @Before
     fun setUp() {
