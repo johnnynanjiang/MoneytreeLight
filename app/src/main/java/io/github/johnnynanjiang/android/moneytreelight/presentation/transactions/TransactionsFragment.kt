@@ -43,12 +43,23 @@ class TransactionsFragment : BaseMvRxFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.transaction_search, menu)
+        inflater.inflate(R.menu.search, menu)
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.search).actionView as SearchView
         searchView.setSearchableInfo(
             searchManager.getSearchableInfo(activity?.componentName)
         )
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { viewModel.search(it) }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
     }
 
     private fun updateData() = withState(viewModel) { state ->
