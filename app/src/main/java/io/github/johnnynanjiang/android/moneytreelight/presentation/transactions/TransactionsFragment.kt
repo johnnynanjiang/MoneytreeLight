@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import com.airbnb.epoxy.EpoxyTouchHelper
 import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.R
 import io.github.johnnynanjiang.android.moneytreelight.viewmodel.TransactionsViewModel
@@ -35,6 +36,7 @@ class TransactionsFragment : BaseMvRxFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.getTransactionsForAccount(accountId)
         transactionsRecyclerView.setController(transactionsController)
+        setUpSwipe()
     }
 
     override fun invalidate() = withState(viewModel) { _ ->
@@ -70,5 +72,21 @@ class TransactionsFragment : BaseMvRxFragment() {
         })
 
         searchView.setIconifiedByDefault(true)
+    }
+
+    private fun setUpSwipe() {
+        EpoxyTouchHelper.initSwiping(transactionsRecyclerView)
+            .right()
+            .withTarget(TransactionItemModelViewModel_::class.java)
+            .andCallbacks(object : EpoxyTouchHelper.SwipeCallbacks<TransactionItemModelViewModel_>() {
+                override fun onSwipeCompleted(
+                    model: TransactionItemModelViewModel_?,
+                    itemView: View?,
+                    position: Int,
+                    direction: Int
+                ) {
+                    viewModel.deleteItemAt(position)
+                }
+            })
     }
 }

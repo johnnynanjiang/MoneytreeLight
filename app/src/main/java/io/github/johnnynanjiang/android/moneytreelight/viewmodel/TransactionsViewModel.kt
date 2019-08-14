@@ -47,9 +47,10 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
     }
 
     fun closeSearch() =
-        withState {
-            setState { copy(transactions = transactionsRequest() ?: listOf()) }
-        }
+        setState { copy(transactions = transactionsRequest() ?: listOf()) }
+
+    fun deleteItemAt(position: Int) =
+        setState { copy(transactions = transactions.filterIndexed { index, _ -> index != position }) }
 
     private fun mapTransactionFromDataToPresentation(jsonObject: JSONObject): List<TransactionView> =
         mapTransactionsFromDomainToPresentation(
