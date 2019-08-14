@@ -11,7 +11,6 @@ import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 
 private val EMPTY_LIST: List<TransactionView> = listOf()
-private const val LIST_HEADER_OFFSET = 1
 
 data class TransactionsState(
     val transactionsRequest: Async<List<TransactionView>> = Uninitialized,
@@ -22,6 +21,8 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
     BaseMvRxViewModel<TransactionsState>(state, debugMode = true) {
 
     companion object : MvRxViewModelFactory<TransactionsViewModel, TransactionsState> {
+        private const val LIST_HEADER_OFFSET = 1
+
         @JvmStatic
         override fun create(viewModelContext: ViewModelContext, state: TransactionsState): TransactionsViewModel? {
             return TransactionsViewModel(state, viewModelContext.app<MTLApplication>().localTransactionsRepository)
@@ -52,9 +53,8 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
     fun closeSearch() =
         setState { copy(transactions = transactionsRequest() ?: EMPTY_LIST) }
 
-    fun deleteItemAt(position: Int) {
+    fun deleteItemAt(position: Int) =
         setState { copy(transactions = transactions.filterIndexed { index, _ -> index != (position - LIST_HEADER_OFFSET) }) }
-    }
 
     private fun mapTransactionFromDataToPresentation(jsonObject: JSONObject): List<TransactionView> =
         mapTransactionsFromDomainToPresentation(

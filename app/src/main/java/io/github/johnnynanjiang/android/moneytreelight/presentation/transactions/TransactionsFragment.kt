@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyTouchHelper
 import com.airbnb.mvrx.*
 import io.github.johnnynanjiang.android.moneytreelight.R
@@ -39,8 +40,11 @@ class TransactionsFragment : BaseMvRxFragment() {
         setUpSwipe()
     }
 
-    override fun invalidate() = withState(viewModel) { _ ->
-        withState(viewModel) { transactionsController.setData(it.transactions) }
+    override fun invalidate() = withState(viewModel) {
+        progressBar.isVisible = it.transactionsRequest is Loading
+        transactionsRecyclerView.isVisible = it.transactionsRequest is Success
+
+        transactionsController.setData(it.transactions)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
