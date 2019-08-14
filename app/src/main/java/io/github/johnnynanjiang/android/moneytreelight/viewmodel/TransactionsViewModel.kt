@@ -10,9 +10,12 @@ import io.github.johnnynanjiang.android.moneytreelight.presentation.transactions
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 
+private val EMPTY_LIST: List<TransactionView> = listOf()
+private const val LIST_HEADER_OFFSET = 1
+
 data class TransactionsState(
     val transactionsRequest: Async<List<TransactionView>> = Uninitialized,
-    val transactions: List<TransactionView> = listOf()
+    val transactions: List<TransactionView> = EMPTY_LIST
 ) : MvRxState
 
 class TransactionsViewModel(state: TransactionsState, private val transactionsRepository: TransactionsRepository) :
@@ -29,7 +32,7 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
         transactionsRepository.getTransactionsForAccount(accountId)
             .subscribeOn(Schedulers.io())
             .map { mapTransactionFromDataToPresentation(it) }
-            .execute { copy(transactionsRequest = it, transactions = it() ?: listOf()) }
+            .execute { copy(transactionsRequest = it, transactions = it() ?: EMPTY_LIST) }
 
     fun search(query: String) {
         withState {
@@ -42,15 +45,16 @@ class TransactionsViewModel(state: TransactionsState, private val transactionsRe
                 }
             }
 
-            setState { copy(transactions = searchResults ?: listOf()) }
+            setState { copy(transactions = searchResults ?: EMPTY_LIST) }
         }
     }
 
     fun closeSearch() =
-        setState { copy(transactions = transactionsRequest() ?: listOf()) }
+        setState { copy(transactions = transactionsRequest() ?: EMPTY_LIST) }
 
-    fun deleteItemAt(position: Int) =
-        setState { copy(transactions = transactions.filterIndexed { index, _ -> index != position }) }
+    fun deleteItemAt(position: Int) {
+        setState { copy(transactions = transactions.filterIndexed { index, _ -> index != (position - LIST_HEADER_OFFSET) }) }
+    }
 
     private fun mapTransactionFromDataToPresentation(jsonObject: JSONObject): List<TransactionView> =
         mapTransactionsFromDomainToPresentation(
